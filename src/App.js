@@ -51,9 +51,10 @@ return newarray;
   render() {
     return (
       <>
-        <div>
-          <p>highScore, {this.state.highScore}</p>
-          <p> score, {this.state.score}</p>
+        <div className="title">
+          <h1>clicky game</h1>
+          <h2>highScore, {this.state.highScore}</h2>
+          <h2> score, {this.state.score}</h2>
         </div>
 
         <Wrapper>

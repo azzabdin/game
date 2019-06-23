@@ -2,10 +2,11 @@
     padding-top: 350px;
     background: #ECEFF1;
     height: 100%;
+    widows: 100%;
     display: flex;
     flex-flow: row wrap;
-    padding: 20px;
-    justify-content: space-around;
+    padding: 26px;
+    margin: 20px;
     align-content: flex-start;
     overflow: auto;
   }
