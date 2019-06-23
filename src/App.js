@@ -1,26 +1,78 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Pics from "./components/pics";
+import Wrapper from "./components/Wrapper";
+import Pictures from "./pics.json";
+class App extends Component {
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  state = {
+    Pictures,
+    score: 0,
+    highScore: 0,
+    count: []
+  };
+
+  // add shuffle function
+
+ shuffle=(array)=> {
+  const newarray = array.sort(() => Math.random() - 0.5);
+return newarray;
+}
+
+  handleClick = (id) => {
+    if (this.state.count.includes(id)) {
+      // you lose
+      alert('you lose')
+      this.setState({
+        count:[],
+        score:0,
+        //highScore: topScore
+      })
+    } else {
+     const ShuffeledArray= this.shuffle(this.state.Pictures)
+      const newScore = this.state.score + 1;
+      let topScore = this.state.highScore;
+      if (newScore > topScore) {
+        topScore = newScore
+
+      }
+
+      // keep going
+      this.setState({
+        count: [...this.state.count, id],
+        score: newScore,
+        highScore: topScore,
+        Pictures:ShuffeledArray
+      })
+    }
+
+
+  }
+
+  render() {
+    return (
+      <>
+        <div>
+          <p>highScore, {this.state.highScore}</p>
+          <p> score, {this.state.score}</p>
+        </div>
+
+        <Wrapper>
+
+          {this.state.Pictures.map(picture => (
+            <Pics
+              id={picture.id}
+              key={picture.id}
+              image={picture.image}
+              handleClick={this.handleClick}
+
+            />
+          ))}
+        </Wrapper>
+      </>
+    );
+  }
 }
 
 export default App;
+
+
